@@ -12,10 +12,15 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // 🔥 DODANO: fallback currency
+    // 🔥 Normalizacija podatkov – KLJUČNO
     data.data = data.data.map(t => ({
       ...t,
-      currency: t.currency || "RUB"
+      price: t.price || t.value || 0,
+      currency: t.currency || "RUB",
+      airline: t.airline || "Unknown",
+      flight_number: t.flight_number || "—",
+      transfers: t.transfers ?? 0,
+      duration: t.duration || "?"
     }));
 
     res.status(200).json(data);
