@@ -11,6 +11,13 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+
+    // 🔥 DODANO: fallback currency
+    data.data = data.data.map(t => ({
+      ...t,
+      currency: t.currency || "RUB"
+    }));
+
     res.status(200).json(data);
 
   } catch (err) {
