@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // 🔥 Normalizacija podatkov – KLJUČNO
+    // 🔥 KLJUČNO: normalizacija podatkov
     data.data = data.data.map(t => ({
       ...t,
       price: t.price || t.value || 0,
